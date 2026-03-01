@@ -51,9 +51,17 @@ public class HdfcHomePageTest {
         HdfcHomePage homePage = new HdfcHomePage(driver);
 
         // Validate title using Page method
-        Assert.assertTrue(homePage.getPageTitle().contains("HDFC"),
-                "Title does not contain HDFC");
-
+		/*
+		 * Assert.assertTrue(homePage.getPageTitle().contains("HDFC"),
+		 * "Title does not contain HDFC");
+		 */
+        
+        Assert.assertTrue(homePage.getPageTitle().contains("HDFC"));
+        
+        String title = homePage.getPageTitle();
+        System.out.println("Page Title is: " + title);
+        Assert.assertTrue(title.contains("HDFC"), "Title validation failed");
+        
         driver.quit();
     }
 }
