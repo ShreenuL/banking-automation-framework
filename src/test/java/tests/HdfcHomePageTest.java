@@ -37,13 +37,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HdfcHomePage;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class HdfcHomePageTest {
 
     @Test
     public void verifyHdfcBankHomePage() {
 
-        WebDriver driver = new ChromeDriver();
+//        WebDriver driver = new ChromeDriver();s
+        
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+
+        WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get("https://www.hdfc.bank.in/");
 
