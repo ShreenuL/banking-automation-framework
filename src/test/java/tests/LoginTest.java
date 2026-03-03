@@ -1,29 +1,29 @@
 package tests;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 import pages.LoginPage;
 
-public class LoginTest {
-
-    WebDriver driver;
-
-    @BeforeClass
-    public void setup(){
-        driver = new ChromeDriver();   // No path
-        driver.manage().window().maximize();
-        driver.get("https://demo.guru99.com");
-    }
+public class LoginTest extends BaseTest {
 
     @Test
-    public void testLogin(){
+    public void testLogin() {
+
+        driver.get("https://demo.guru99.com");
+        
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Click Bank Project link
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Bank Project"))).click();
+
+        // Wait until username field is visible
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("uid")));
+
         LoginPage login = new LoginPage(driver);
         login.login("mngr123", "Abcd1234");
-    }
-
-    @AfterClass
-    public void tearDown(){
-        driver.quit();
     }
 }
