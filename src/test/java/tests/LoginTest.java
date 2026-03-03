@@ -18,7 +18,10 @@ public class LoginTest extends BaseTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         // Click Bank Project link
-        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Bank Project"))).click();
+//        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Bank Project"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(
+        	    By.cssSelector("a[href*='V1/index.php']")
+        	)).click();
 
         // Wait until username field is visible
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("uid")));
