@@ -2,15 +2,13 @@ name: Selenium CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main, feature/homepage-title-validation ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest   # 🔥 Change from windows to ubuntu
 
     steps:
       - name: Checkout Repository
@@ -22,5 +20,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build with Maven
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Run Tests
         run: mvn clean test
