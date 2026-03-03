@@ -36,8 +36,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.HdfcHomePage;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.time.Duration;
 
 public class HdfcHomePageTest {
 
@@ -46,30 +51,27 @@ public class HdfcHomePageTest {
 
 //        WebDriver driver = new ChromeDriver();s
         
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
+    	ChromeOptions options = new ChromeOptions();
+    	options.addArguments("--headless=new");
+    	options.addArguments("--no-sandbox");
+    	options.addArguments("--disable-dev-shm-usage");
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.get("https://www.hdfc.bank.in/");
+    	WebDriverManager.chromedriver().setup();
+    	WebDriver driver = new ChromeDriver(options);
 
-        // Create object of Page Class
-        HdfcHomePage homePage = new HdfcHomePage(driver);
+    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        // Validate title using Page method
-		/*
-		 * Assert.assertTrue(homePage.getPageTitle().contains("HDFC"),
-		 * "Title does not contain HDFC");
-		 */
-        
-        Assert.assertTrue(homePage.getPageTitle().contains("HDFC"));
-        
-        String title = homePage.getPageTitle();
-        System.out.println("Page Title is: " + title);
-        Assert.assertTrue(title.contains("HDFC"), "Title validation failed");
-        
-        driver.quit();
+    	driver.get("https://www.hdfc.bank.in/");
+
+    	// Wait until title contains HDFC
+    	wait.until(ExpectedConditions.titleContains("HDFC"));
+
+    	String title = driver.getTitle();
+    	System.out.println("Title is: " + title);
+
+    	Assert.assertTrue(title.contains("HDFC"), "Title validation failed");
+    	System.out.println("Title is: " + driver.getTitle());
+
+    	driver.quit();
     }
 }
