@@ -1,5 +1,7 @@
 package reporting;
 
+import java.io.File;
+
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
@@ -11,8 +13,14 @@ public class ExtentManager {
     public static ExtentReports getInstance() {
 
         if (extent == null) {
+        	
+        	String reportDir = System.getProperty("user.dir") + "/target/ExtentReports";
+        	new File(reportDir).mkdirs();
 
-            String reportPath = "target/ExtentReports/ExtentReport.html";
+//            String reportPath = "target/ExtentReports/ExtentReport.html";
+        	
+        	 String reportPath = System.getProperty("user.dir") + "/target/ExtentReports/ExtentReport.html";
+
 
             ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
             spark.config().setReportName("Selenium Automation Report");
