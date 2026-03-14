@@ -23,6 +23,8 @@ public class ExtentManager {
             }
 
             String reportPath = reportDir + "/ExtentReport.html";
+            
+            System.out.println("Extent Report Path: " + reportPath);
 
             ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
             spark.config().setReportName("Selenium Automation Report");
