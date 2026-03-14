@@ -14,8 +14,13 @@ public class ExtentManager {
 
         if (extent == null) {
 
+            // Create report directory inside Jenkins workspace
             String reportDir = System.getProperty("user.dir") + "/target/ExtentReports";
-            new File(reportDir).mkdirs();   // <-- creates folder in Jenkins workspace
+            File dir = new File(reportDir);
+
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
 
             String reportPath = reportDir + "/ExtentReport.html";
 
