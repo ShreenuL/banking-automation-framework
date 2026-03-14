@@ -13,19 +13,15 @@ public class ExtentManager {
     public static ExtentReports getInstance() {
 
         if (extent == null) {
-        	
-        	String reportDir = System.getProperty("user.dir") + "/target/ExtentReports";
-        	new File(reportDir).mkdirs();
 
-//            String reportPath = "target/ExtentReports/ExtentReport.html";
-        	
-        	String reportPath = reportDir + "/ExtentReport.html";
-        	ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
+            String reportDir = System.getProperty("user.dir") + "/target/ExtentReports";
+            new File(reportDir).mkdirs();   // <-- creates folder in Jenkins workspace
 
+            String reportPath = reportDir + "/ExtentReport.html";
+
+            ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
             spark.config().setReportName("Selenium Automation Report");
             spark.config().setDocumentTitle("Test Execution Report");
-            
-            // 🔥 Enable Dark Theme
             spark.config().setTheme(Theme.DARK);
 
             extent = new ExtentReports();
