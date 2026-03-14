@@ -19,10 +19,9 @@ public class ExtentManager {
 
 //            String reportPath = "target/ExtentReports/ExtentReport.html";
         	
-        	 String reportPath = System.getProperty("user.dir") + "/target/ExtentReports/ExtentReport.html";
+        	String reportPath = reportDir + "/ExtentReport.html";
+        	ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
 
-
-            ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
             spark.config().setReportName("Selenium Automation Report");
             spark.config().setDocumentTitle("Test Execution Report");
             
