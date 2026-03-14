@@ -27,7 +27,76 @@
 		    <artifactId>webdrivermanager</artifactId>
 		    <version>5.8.0</version>
 		</dependency>
+		
+		<!-- Added Apache Commons IO Dependency -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.15.1</version>
+		</dependency>
+		
+		<!-- Added Extent Dependency -->
+		<dependency>
+		    <groupId>com.aventstack</groupId>
+		    <artifactId>extentreports</artifactId>
+		    <version>5.1.1</version>
+		</dependency>
+		
+		<!-- Added Rest Assured Dependency -->
+		<dependency>
+		    <groupId>io.rest-assured</groupId>
+		    <artifactId>rest-assured</artifactId>
+		    <version>5.4.0</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.rest-assured</groupId>
+		    <artifactId>json-path</artifactId>
+		    <version>5.4.0</version>
+		</dependency>
+		
+		
+		<!-- Add Log4j2 Dependencies --> 
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.23.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.23.1</version>
+		</dependency>
 
 	</dependencies>
+	
+	<build>
+	    <plugins>
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-surefire-plugin</artifactId>
+	            <version>3.2.5</version>
+	            
+	            <configuration>
+	                <suiteXmlFiles>
+	                    <suiteXmlFile>testng.xml</suiteXmlFile>
+	                </suiteXmlFiles>
+
+	                <!-- run tests in parallel -->
+	                <parallel>methods</parallel>
+	
+	                <!-- number of threads -->
+	                <threadCount>2</threadCount>
+	
+	                <!-- reuse threads -->
+	                <useUnlimitedThreads>false</useUnlimitedThreads>
+	
+	            </configuration>
+	
+	        </plugin>
+	    </plugins>
+	</build>
 
 </project>
