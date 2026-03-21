@@ -2,6 +2,12 @@
 
 <suite name="Automation Test Suite" parallel="classes" thread-count="2">
 
+    <!-- Allure + Custom Listener -->
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+        <listener class-name="reporting.TestListener"/>
+    </listeners>
+
     <!-- Smoke Tests -->
     <test name="Smoke Tests">
 
@@ -17,7 +23,6 @@
 
     </test>
 
-
     <!-- Regression Tests -->
     <test name="Regression Tests">
 
@@ -32,7 +37,6 @@
         </packages>
 
     </test>
-
 
     <!-- API Tests -->
     <test name="API Tests">
