@@ -49,7 +49,7 @@ public class LoginTest extends BaseTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("uid")));
 
         LoginPage login = new LoginPage(getDriver());
-//        login.login("mngr123", "Abcd1234");
+        //login.login("mngr123", "Abcd1234");
         
         //Using Data Provider for multiple logins data.
         login.login(username, password);
