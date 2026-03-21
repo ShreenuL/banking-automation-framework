@@ -13,12 +13,25 @@ import utils.TestDataProvider;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 
 public class LoginTest extends BaseTest {
 	
 	private static final Logger log = LogManager.getLogger(LoginTest.class);
 
 	 @Test(dataProvider = "loginData", dataProviderClass = TestDataProvider.class, retryAnalyzer = utils.RetryAnalyzer.class, groups = {"regression"})
+	 
+	 @Feature("Banking Application Login")
+	 @Story("User Login with Valid Credentials")
+	 @Owner("Shreenu Lingam")
+	 @Severity(SeverityLevel.CRITICAL)
+	 @Description("Verify that user can login successfully using valid username and password")
+
 	    public void testLogin(String username, String password) {
 		 
 //		 System.out.println("Running login test with: " + username + " | " + password);
