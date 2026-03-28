@@ -58,8 +58,7 @@ public class BaseTest {
 	 * 
 	 * browser.manage().window().maximize();
 	 * 
-	 * driver.set(browser); // 🔴 IMPORTANT LINE }
-	 */
+	 * driver.set(browser); // 🔴 IMPORTANT LINE }*/
 
 	/*
 	 * @BeforeMethod(alwaysRun = true) public void setup() throws Exception {
