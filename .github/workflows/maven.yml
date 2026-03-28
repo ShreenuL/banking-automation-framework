@@ -1,27 +1,40 @@
-name: Selenium CI
+name: Automation Tests
 
 on:
   push:
-    branches: [ main, feature/homepage-title-validation ]
   pull_request:
-    branches: [ main ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest   # 🔥 Change from windows to ubuntu
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      selenium-hub:
+        image: selenium/hub:4.21.0
+        ports:
+          - 4444:4444
+
+      chrome:
+        image: selenium/node-chrome:4.21.0
+        options: --shm-size=2gb
+        env:
+          SE_EVENT_BUS_HOST: selenium-hub
+          SE_EVENT_BUS_PUBLISH_PORT: 4442
+          SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up JDK 17
+      - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
           distribution: 'temurin'
+          java-version: '17'
 
-      - name: Install Chrome
-        uses: browser-actions/setup-chrome@v1
+      - name: Wait for Grid
+        run: sleep 15
 
       - name: Run Tests
+        env:
+          GRID_URL: http://localhost:4444
         run: mvn clean test
