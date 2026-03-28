@@ -10,6 +10,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
+import io.qameta.allure.Attachment;
+
 public class ScreenshotUtil {
 
     public static String captureScreenshot(WebDriver driver, String testName) {
@@ -28,4 +30,12 @@ public class ScreenshotUtil {
 
         return screenshotPath;
     }
+    
+    @Attachment(value = "Failure Screenshot", type = "image/png")
+    public static byte[] attachScreenshotToAllure(WebDriver driver) {
+
+        return ((TakesScreenshot) driver)
+                .getScreenshotAs(OutputType.BYTES);
+    }
+    
 }
