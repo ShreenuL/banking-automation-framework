@@ -15,8 +15,9 @@ pipeline {
 
         stage('Run Tests with Docker') {
             steps {
-                bat 'docker-compose down'
-                bat 'docker-compose up -d'
+                bat 'docker-compose down --remove-orphans || exit 0'
+				bat 'docker rm -f test-runner selenium-hub || exit 0'
+				bat 'docker-compose up -d --force-recreate'
                 bat 'timeout /t 20'
                 bat 'mvn clean test'
                 bat 'docker-compose down'
