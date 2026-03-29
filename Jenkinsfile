@@ -18,7 +18,8 @@ pipeline {
                 bat 'docker-compose down --remove-orphans || exit 0'
 				bat 'docker rm -f test-runner selenium-hub || exit 0'
 				bat 'docker-compose up -d --force-recreate'
-                bat 'timeout /t 20'
+                /*bat 'timeout /t 20'*/
+                bat 'ping 127.0.0.1 -n 20 > nul'
                 bat 'mvn clean test'
                 bat 'docker-compose down'
             }
